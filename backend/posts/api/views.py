@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
-from ..models import Post
-from .serializers import PostSerializer
+from ..models import News
+from .serializers import NewsSerializer
 
-class PostViewSet(ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+class NewsViewSet(ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer

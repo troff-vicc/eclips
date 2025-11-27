@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
-from .views import PostViewSet
+from .views import NewsViewSet
 
-post_router = DefaultRouter()
-post_router.register(r'posts', PostViewSet)
+news_router = DefaultRouter()
+news_router.register(r'news', NewsViewSet)

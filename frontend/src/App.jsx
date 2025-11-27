@@ -1,35 +1,25 @@
-import { useState,useEffect } from 'react'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home/Home';
+import University from './pages/University/University';
+import Education from './pages/Education/Education';
+import Science from './pages/Science/Science';
+import Library from './pages/Library/Library';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [data, setData] = useState([])
-
-  useEffect(()=>{
-    async function fetchData(){
-      console.log(import.meta.env.VITE_API_URL)
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}posts/`)
-        if(!response.ok){
-          throw new error('Network response was not ok');
-        }
-        const result = await response.json();
-        console.log(result);
-        setData(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-
-    }
-    fetchData();
-
-  },[]);
-
   return (
-    <>
-    <h1>Эклипсы</h1>
-    </>
-  )
+    <div className="app">
+      <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/university" element={<University />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/science" element={<Science />} />
+            <Route path="/library" element={<Library />} />
+          </Routes>
+      </Router>
+    </div>
+  );
 }
 
-export default App
+export default App;
