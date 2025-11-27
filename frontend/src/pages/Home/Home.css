@@ -191,17 +191,6 @@
   padding: 30px;
 }
 
-.news-category {
-  display: inline-block;
-  background: #0056b3;
-  color: white;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
 .news-headline {
   font-size: 1.8rem;
   margin-bottom: 15px;
@@ -525,5 +514,120 @@
 
   .feature-title {
     font-size: 1.2rem;
+  }
+}
+
+/* Dropdown Menu Styles */
+.nav-item.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 30px;
+  font-size: 18px;
+  transition: opacity 0.3s;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 10px 0;
+  z-index: 1001;
+  margin-top: 10px;
+  animation: dropdownFade 0.3s ease;
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: #f8f9fa;
+  color: #0056b3;
+  padding-left: 25px;
+}
+
+/* Анимация для выпадающего меню */
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стили для header при скролле */
+.header.scrolled .nav-link {
+  color: #333;
+}
+
+.header.scrolled .dropdown-menu {
+  background: white;
+}
+
+.header.scrolled .dropdown-menu::before {
+  background: white;
+}
+
+/* Responsive для dropdown */
+@media (max-width: 768px) {
+  .nav-item.dropdown {
+    position: static;
+  }
+
+  .dropdown-menu {
+    position: fixed;
+    top: auto;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    margin-top: 5px;
+  }
+
+  .dropdown-menu::before {
+    display: none;
+  }
+
+  .nav-link {
+    margin-left: 15px;
+    font-size: 16px;
   }
 }

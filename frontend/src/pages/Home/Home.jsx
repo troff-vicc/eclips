@@ -8,30 +8,33 @@ const Home = () => {
     setIsChatOpen(!isChatOpen);
   };
 
-  // Пример данных новостей
+
+
   const newsData = {
     mainNews: {
       id: 1,
-      image: './news1.png',
+      img_path: './news1.png',
       title: 'ВГУ открывает новые магистерские программы в сотрудничестве с ведущими IT-компаниями',
-      date: '15 декабря 2023',
-      category: 'Образование'
+      body: '15 декабря 2023'
     },
     sideNews: [
       {
         id: 2,
+        img_path: './news1.png',
         title: 'Ученые ВГУ получили грант на исследования в области квантовых вычислений',
-        date: '10 декабря 2023'
+        body: '10 декабря 2023'
       },
       {
         id: 3,
+        img_path: './news1.png',
         title: 'Библиотека ВГУ пополнилась новыми электронными ресурсами',
-        date: '5 декабря 2023'
+        body: '5 декабря 2023'
       },
       {
         id: 4,
+        img_path: './news1.png',
         title: 'Студенты ВГУ победили в международной олимпиаде по программированию',
-        date: '1 декабря 2023'
+        body: '1 декабря 2023'
       }
     ]
   };
@@ -63,6 +66,8 @@ const Home = () => {
       title: 'Научные достижения'
     }
   ];
+
+
 
   return (
     <div className="home">
@@ -113,19 +118,18 @@ const Home = () => {
           <div className="news-grid">
             <div className="main-news">
               <div className="news-image">
-                <img src={newsData.mainNews.image} alt={newsData.mainNews.title} />
+                <img src={newsData.mainNews.img_path} alt={newsData.mainNews.title} />
               </div>
               <div className="news-content">
-                <span className="news-category">{newsData.mainNews.category}</span>
                 <h3 className="news-headline">{newsData.mainNews.title}</h3>
-                <span className="news-date">{newsData.mainNews.date}</span>
+                <span className="news-date">{newsData.mainNews.body}</span>
               </div>
             </div>
 
             <div className="side-news">
               {newsData.sideNews.map(news => (
                 <div key={news.id} className="side-news-item">
-                  <span className="side-news-date">{news.date}</span>
+                  <span className="side-news-date">{news.body}</span>
                   <h4 className="side-news-title">{news.title}</h4>
                 </div>
               ))}
