@@ -1,36 +1,71 @@
-.header1 {
-  background: #d9d9d9;
-  padding: 20px 0;
-  border-bottom: 1px solid #e0e0e0;
-  width: 100%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.calculator {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+.scores-input {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
-/* Стили для прозрачного состояния */
-.nav a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+.score-field {
+    display: flex;
+    flex-direction: column;
 }
 
-.nav a:hover {
-  color: #f0f0f0;
+.score-field label {
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-.logo {
-  transition: filter 0.3s ease;
+.score-field input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.total-section {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.find-button {
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.find-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.ways-list {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.way-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.way-card h4 {
+    margin: 0 0 10px 0;
+    color: #333;
 }
 
 .calculator {
@@ -442,4 +477,43 @@ padding-top: 20px;
   .direction-card {
     padding: 15px;
   }
+}
+
+.required-subjects ul {
+    list-style: none;
+    padding: 0;
+}
+
+.required-subjects li {
+    padding: 3px 0;
+    margin: 2px 0;
+    font-size: 14px;
+}
+
+.way-description {
+    font-style: italic;
+    color: #666;
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.way-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+}
+
+.way-card h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.required-subjects h5 {
+    margin: 10px 0 5px 0;
+    font-size: 16px;
+    color: #555;
 }
