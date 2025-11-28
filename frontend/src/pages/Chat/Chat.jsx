@@ -14,11 +14,22 @@ const Chat = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Функция для ответа бота
+  const handleBotResponse = () => {
+    setTimeout(() => {
+      setMessages(prevMessages => [
+        ...prevMessages,
+        { text: "Здравствуйте, чем могу помочь?", isUser: false }
+      ]);
+    }, 1000); // Задержка 1 секунда для имитации "печатания" бота
+  };
+
   const handleSend = () => {
     if (inputValue.trim()) {
       setMessages([...messages, { text: inputValue, isUser: true }]);
       setInputValue('');
-      // Здесь будет логика обработки сообщения ботом
+      // Вызываем ответ бота после отправки сообщения пользователем
+      handleBotResponse();
     }
   };
 
@@ -30,6 +41,17 @@ const Chat = () => {
 
   return (
     <div className="chat-container">
+      <header className="header1">
+        <div className="header-container">
+          <a href="/"><img src="./logo.png" alt="Логотип" className="logo" /></a>
+          <nav className="nav">
+            <a className="but_header" href="/university">Университет</a>
+            <a className="but_header" href="/education">Образование</a>
+            <a className="but_header" href="/science">Наука</a>
+            <a className="but_header" href="/library">Библиотека</a>
+          </nav>
+        </div>
+      </header>
       <div className="messages-container">
         {messages.map((message, index) => (
           <div

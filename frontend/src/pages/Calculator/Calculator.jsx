@@ -142,6 +142,17 @@ const Calculator = () => {
 
   return (
     <div className="calculator">
+    <header className="header1">
+        <div className="header-container">
+          <a href="/"><img src="./logo.png" alt="Логотип" className="logo" /></a>
+          <nav className="nav">
+            <a className="but_header" href="/university">Университет</a>
+            <a className="but_header" href="/education">Образование</a>
+            <a className="but_header" href="/science">Наука</a>
+            <a className="but_header" href="/library">Библиотека</a>
+          </nav>
+        </div>
+    </header>
       <div className="calculator-header">
         <h1>Калькулятор баллов для поступающих в ВУЗ</h1>
         <p>Рассчитайте свой общий балл и узнайте доступные направления</p>

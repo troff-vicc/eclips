@@ -1,3 +1,38 @@
+.header1 {
+  background: #d9d9d9;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Стили для прозрачного состояния */
+.nav a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nav a:hover {
+  color: #f0f0f0;
+}
+
+.logo {
+  transition: filter 0.3s ease;
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;

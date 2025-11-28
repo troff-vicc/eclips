@@ -40,7 +40,7 @@ const Admission = () => {
     <div className="admission-container">
     <header className="header">
         <div className="header-container">
-          <img src="./logo.png" alt="Логотип" className="logo" />
+          <a href="/"><img src="./logo.png" alt="Логотип" className="logo" /></a>
           <nav className="nav">
             <a className="but_header" href="/university">Университет</a>
             <a className="but_header" href="/education">Образование</a>
