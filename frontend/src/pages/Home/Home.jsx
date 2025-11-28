@@ -47,25 +47,25 @@ const Home = () => {
   const featureBlocks = [
     {
       id: 1,
-      image: './f1.png',
+      image: './f1.jpeg',
       text: 'text1',
       title: 'Качественное образование'
     },
     {
       id: 2,
-      image: './f2.png',
+      image: './f2.jpeg',
       text: 'text2',
       title: 'Современные лаборатории'
     },
     {
       id: 3,
-      image: './f3.png',
+      image: './f3.jpeg',
       text: 'text3',
       title: 'Международное сотрудничество'
     },
     {
       id: 4,
-      image: './f4.png',
+      image: './f4.jpeg',
       text: 'text4',
       title: 'Научные достижения'
     }

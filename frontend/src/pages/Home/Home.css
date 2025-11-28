@@ -13,6 +13,12 @@
   z-index: 1000;
   transition: background-color 0.3s ease;
 }
+.trans {
+padding-top:10px;
+margin-left:25px;
+height: 40px;
+width: 30px;
+}
 
 .header.scrolled {
   background: rgba(255, 255, 255, 0.95);

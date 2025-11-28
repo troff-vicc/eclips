@@ -12,27 +12,27 @@ const Admission = () => {
     {
       id: 2,
       title: "Информация о приеме в аспирантуру",
-      image: "./p2.png"
+      image: "./p2.jpeg"
     },
     {
       id: 3,
       title: "Информация о приеме в ординатуру",
-      image: "./p3.png"
+      image: "./p3.jpeg"
     },
     {
       id: 4,
       title: "Подготовка к поступлению",
-      image: "./p4.png"
+      image: "./p4.jpeg"
     },
     {
       id: 5,
       title: "Сведения о зачислении",
-      image: "./p5.png"
+      image: "./p5.jpeg"
     },
     {
       id: 6,
       title: "Контакты",
-      image: "./p6.png"
+      image: "./p6.jpeg"
     }
   ];
 
