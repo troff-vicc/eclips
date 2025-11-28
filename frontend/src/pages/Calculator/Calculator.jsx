@@ -35,9 +35,24 @@ const Calculator = () => {
     ];
 
     const handleScoreChange = (subject, value) => {
+
+        let numericValue = value === '' ? '' : parseInt(value) || 0;
+
+        // Ограничения для предметов (0-100)
+        if (subject !== 'extra_points' && numericValue !== '') {
+            if (numericValue > 100) numericValue = 100;
+            if (numericValue < 0) numericValue = 0;
+        }
+        
+        // Ограничения для дополнительных баллов (0-10)
+        if (subject === 'extra_points' && numericValue !== '') {
+            if (numericValue > 10) numericValue = 10;
+            if (numericValue < 0) numericValue = 0;
+        }
+
         setScores(prev => ({
             ...prev,
-            [subject]: value === '' ? '' : parseInt(value) || 0
+            [subject]: numericValue
         }));
     };
 
@@ -106,6 +121,19 @@ const Calculator = () => {
 
     return (
         <div className="calculator">
+            <header className="header1">
+                <div className="header-container">
+                  <a href="/"><img src="./logo.png" alt="Логотип" className="logo" /></a>
+                  <nav className="nav">
+                    <a className="but_header" href="/university">Университет</a>
+                    <a className="but_header" href="/education">Образование</a>
+                    <a className="but_header" href="/science">Наука</a>
+                    <a className="but_header" href="/library">Библиотека</a>
+                  </nav>
+                </div>
+            </header>
+
+            <section className="main">
             <h2>Калькулятор поступления ВГУ</h2>
 
             <div className="scores-input">
@@ -184,6 +212,7 @@ const Calculator = () => {
                     )}
                 </div>
             )}
+        </section>
         </div>
     );
 };
