@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Calculator.css';
 
 const Calculator = () => {
-  // Состояния для хранения данных
   const [subjects, setSubjects] = useState([
     { id: 1, name: 'Русский язык', score: '', maxScore: 100, isActive: true },
     { id: 2, name: 'Математика', score: '', maxScore: 100, isActive: true },
@@ -11,11 +10,77 @@ const Calculator = () => {
   const [individualAchievements, setIndividualAchievements] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [activeSubjectsCount, setActiveSubjectsCount] = useState(2);
+  const [eligibleDirections, setEligibleDirections] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  // Функция для отправки запроса на сервер
+  async function checkEligibleDirections(totalScore) {
+    console.log(import.meta.env.VITE_API_URL);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}calc/check_eligible/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          body: totalScore
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log(result);
+      return result;
+
+    } catch (error) {
+      console.error('Error checking eligible directions:', error);
+      throw error;
+    }
+  }
 
   // Обновление общего балла при изменении данных
   useEffect(() => {
     calculateTotalScore();
   }, [subjects, individualAchievements]);
+
+  // Расчет общего балла
+  const calculateTotalScore = () => {
+    const activeSubjects = subjects.filter(subject => subject.isActive);
+    const subjectsScore = activeSubjects.reduce((sum, subject) => {
+      const score = subject.score === '' ? 0 : Number(subject.score);
+      return sum + score;
+    }, 0);
+
+    const total = subjectsScore + Number(individualAchievements);
+    setTotalScore(total);
+    setActiveSubjectsCount(activeSubjects.length);
+  };
+
+  // Проверка доступных направлений
+  const handleCheckDirections = async () => {
+    if (totalScore === 0) {
+      setError('Введите баллы по предметам');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const result = await checkEligibleDirections(totalScore);
+      setEligibleDirections(result.eligible_directions || []);
+    } catch (err) {
+      setError('Ошибка при получении данных с сервера');
+      console.error('Error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Обработчик изменения балла по предмету
   const handleScoreChange = (id, value) => {
@@ -31,7 +96,6 @@ const Calculator = () => {
     setSubjects(prev => prev.map(subject => {
       if (subject.id === id) {
         const newActiveState = !subject.isActive;
-        // Если деактивируем предмет, сбрасываем балл
         const newScore = newActiveState ? subject.score : '';
         return { ...subject, isActive: newActiveState, score: newScore };
       }
@@ -64,34 +128,23 @@ const Calculator = () => {
     ));
   };
 
-  // Расчет общего балла
-  const calculateTotalScore = () => {
-    const activeSubjects = subjects.filter(subject => subject.isActive);
-    const subjectsScore = activeSubjects.reduce((sum, subject) => {
-      const score = subject.score === '' ? 0 : Number(subject.score);
-      return sum + score;
-    }, 0);
-
-    const total = subjectsScore + Number(individualAchievements);
-    setTotalScore(total);
-    setActiveSubjectsCount(activeSubjects.length);
-  };
-
   // Сброс всех данных
   const handleReset = () => {
     setSubjects(prev => prev.map(subject => ({
       ...subject,
       score: '',
-      isActive: subject.id <= 2 // Оставляем активными только первые два предмета
+      isActive: subject.id <= 2
     })));
     setIndividualAchievements(0);
+    setEligibleDirections([]);
+    setError('');
   };
 
   return (
     <div className="calculator">
       <div className="calculator-header">
         <h1>Калькулятор баллов для поступающих в ВУЗ</h1>
-        <p>Рассчитайте свой общий балл на основе результатов ЕГЭ и индивидуальных достижений</p>
+        <p>Рассчитайте свой общий балл и узнайте доступные направления</p>
       </div>
 
       <div className="calculator-content">
@@ -180,8 +233,51 @@ const Calculator = () => {
               <p>Предметы: {activeSubjectsCount}</p>
               <p>Индивидуальные достижения: {individualAchievements}</p>
             </div>
+            <button
+              className={`check-directions-btn ${loading ? 'loading' : ''}`}
+              onClick={handleCheckDirections}
+              disabled={loading || totalScore === 0}
+            >
+              {loading ? 'Загрузка...' : 'Проверить направления'}
+            </button>
           </div>
         </div>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+
+        {eligibleDirections.length > 0 && (
+          <div className="directions-section">
+            <h2>Доступные направления ({eligibleDirections.length})</h2>
+            <div className="directions-list">
+              {eligibleDirections.map(direction => (
+                <div key={direction.id} className="direction-card">
+                  <h3 className="direction-title">{direction.title}</h3>
+                  <div className="direction-scores">
+                    <div className="direction-total">
+                      Проходной балл: <strong>{direction.body}</strong>
+                    </div>
+                    <div className="subject-requirements">
+                      {direction.russion > 0 && <span>Русский: {direction.russion}</span>}
+                      {direction.math > 0 && <span>Математика: {direction.math}</span>}
+                      {direction.phys > 0 && <span>Физика: {direction.phys}</span>}
+                      {direction.inf > 0 && <span>Информатика: {direction.inf}</span>}
+                      {direction.chem > 0 && <span>Химия: {direction.chem}</span>}
+                      {direction.bio > 0 && <span>Биология: {direction.bio}</span>}
+                      {direction.hist > 0 && <span>История: {direction.hist}</span>}
+                      {direction.soc > 0 && <span>Обществознание: {direction.soc}</span>}
+                      {direction.lit > 0 && <span>Литература: {direction.lit}</span>}
+                      {direction.eng > 0 && <span>Английский: {direction.eng}</span>}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="actions-section">
           <button className="reset-btn" onClick={handleReset}>
