@@ -4,6 +4,7 @@ import University from './pages/University/University';
 import Education from './pages/Education/Education';
 import Science from './pages/Science/Science';
 import Library from './pages/Library/Library';
+import Chat from './pages/Chat/Chat';
 import './App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/education" element={<Education />} />
             <Route path="/science" element={<Science />} />
             <Route path="/library" element={<Library />} />
+            <Route path="/chat" element={<Chat />} />
           </Routes>
       </Router>
     </div>

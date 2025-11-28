@@ -1,43 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 
 const Home = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [count, setCount] = useState(0)
+  const [data, setData] = useState([])
+  const [newsData, setNewsData] = useState({
+    mainNews: {},
+    sideNews: [
+    ]
+  });
 
+  useEffect(()=>{
+    async function fetchData(){
+      console.log(import.meta.env.VITE_API_URL)
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}news/`)
+        if(!response.ok){
+          throw new error('Network response was not ok');
+        }
+        const result = await response.json();
+        console.log(result);
+        setData(result);
+
+        if (result.length > 0) {
+        setNewsData({
+          mainNews: result[0],
+          sideNews: result.slice(1)
+        });
+      }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+
+    }
+    fetchData();
+
+  },[]);
+
+  console.log(data[0]);
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
   };
 
-
-
-  const newsData = {
-    mainNews: {
-      id: 1,
-      img_path: './news1.png',
-      title: 'ВГУ открывает новые магистерские программы в сотрудничестве с ведущими IT-компаниями',
-      body: '15 декабря 2023'
-    },
-    sideNews: [
-      {
-        id: 2,
-        img_path: './news1.png',
-        title: 'Ученые ВГУ получили грант на исследования в области квантовых вычислений',
-        body: '10 декабря 2023'
-      },
-      {
-        id: 3,
-        img_path: './news1.png',
-        title: 'Библиотека ВГУ пополнилась новыми электронными ресурсами',
-        body: '5 декабря 2023'
-      },
-      {
-        id: 4,
-        img_path: './news1.png',
-        title: 'Студенты ВГУ победили в международной олимпиаде по программированию',
-        body: '1 декабря 2023'
-      }
-    ]
-  };
 
   // Данные для блоков с фото
   const featureBlocks = [
@@ -75,10 +80,10 @@ const Home = () => {
         <div className="header-container">
           <img src="./logo.png" alt="Логотип" className="logo" />
           <nav className="nav">
-            <a class="but_header" href="/university">Университет</a>
-            <a class="but_header" href="/education">Образование</a>
-            <a class="but_header" href="/science">Наука</a>
-            <a class="but_header" href="/library">Библиотека</a>
+            <a className="but_header" href="/university">Университет</a>
+            <a className="but_header" href="/education">Образование</a>
+            <a className="but_header" href="/science">Наука</a>
+            <a className="but_header" href="/library">Библиотека</a>
           </nav>
         </div>
       </header>
@@ -143,16 +148,17 @@ const Home = () => {
           Чат
         </button>
         {isChatOpen && (
-          <div className="chat-container">
+          <div className="chat-container1">
             <div className="chat-placeholder">
-              Чат с университетом
               <div className="chat-messages">
-                <p>Добро пожаловать в чат ВГУ!</p>
-                <p>Задайте ваш вопрос...</p>
+                <div id="msg">
+                    <p>Добро пожаловать в чат ВГУ!</p>
+                    <p>Задайте ваш вопрос...</p>
+                </div>
               </div>
               <div className="chat-input">
                 <input type="text" placeholder="Введите сообщение..." />
-                <button>Отправить</button>
+                <a href="/chat"><button>Отправить</button></a>
               </div>
             </div>
           </div>
