@@ -5,6 +5,7 @@ import Education from './pages/Education/Education';
 import Science from './pages/Science/Science';
 import Library from './pages/Library/Library';
 import Chat from './pages/Chat/Chat';
+import Admission from './pages/Admission/Admission';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/science" element={<Science />} />
             <Route path="/library" element={<Library />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/admission" element={<Admission />} />
           </Routes>
       </Router>
     </div>

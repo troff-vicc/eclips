@@ -1,0 +1,53 @@
+.admission-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Стили для первого фото во весь экран */
+.fullscreen-photo {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.fullscreen-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Стили для второго фото */
+.second-photo {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.second-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .fullscreen-photo {
+    height: 70vh; /* Немного уменьшаем высоту на мобильных */
+  }
+
+  .second-image {
+    max-width: 100%;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .fullscreen-photo {
+    height: 60vh;
+  }
+}

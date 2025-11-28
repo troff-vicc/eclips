@@ -20,7 +20,6 @@ const Home = () => {
           throw new error('Network response was not ok');
         }
         const result = await response.json();
-        console.log(result);
         setData(result);
 
         if (result.length > 0) {
