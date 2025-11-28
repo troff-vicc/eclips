@@ -1,3 +1,38 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  padding: 20px 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header.scrolled .nav a {
+  color: #333;
+}
+
+.header.scrolled .logo {
+  filter: brightness(0.8);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
 .admission-container {
   width: 100%;
   margin: 0;
@@ -20,6 +55,63 @@
   display: block;
 }
 
+/* Контейнер для текста поверх изображения */
+.text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 50px;
+  box-sizing: border-box;
+  pointer-events: none; /* Чтобы клики проходили сквозь текст */
+}
+
+.event-title {
+  font-size: 4rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+
+  margin-left: 5%;
+  margin-top: 70px;
+}
+
+.date-section {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  pointer-events: auto;
+}
+
+.day-number {
+  font-size: 10rem;
+  margin-top: 170px;
+  font-weight: 700;
+  line-height: 0.8;
+  color: white;
+  margin-left: 62%;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+.month-name {
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 15px;
+  line-height: 1;
+  color: white;
+  margin-left: 70%;
+  margin-top: 50px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 /* Стили для второго фото */
 .second-photo {
   width: 100%;
@@ -34,14 +126,48 @@
   object-fit: cover;
 }
 
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) {
+  .text-overlay {
+    padding: 40px;
+  }
+
+  .event-title {
+    font-size: 2rem;
+  }
+
+  .day-number {
+    font-size: 6rem;
+  }
+
+  .month-name {
+    font-size: 1.8rem;
+  }
+}
+
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .fullscreen-photo {
-    height: 70vh; /* Немного уменьшаем высоту на мобильных */
+    height: 70vh;
   }
 
-  .second-image {
-    max-width: 100%;
+  .text-overlay {
+    padding: 30px;
+  }
+
+  .event-title {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .day-number {
+    font-size: 4.5rem;
+    text-align: end;
+  }
+
+  .month-name {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
   }
 }
 
@@ -50,4 +176,187 @@
   .fullscreen-photo {
     height: 60vh;
   }
+
+  .text-overlay {
+    padding: 20px;
+  }
+
+  .event-title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .day-number {
+    font-size: 3.5rem;
+  }
+
+  .month-name {
+    font-size: 1.1rem;
+  }
+
+  .date-section {
+    gap: 10px;
+  }
+}
+
+/* Контейнер для блоков поверх второго изображения */
+.blocks-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* Левый блок - Расчет шансов */
+.chance-block {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 400px;
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.chance-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+  line-height: 1.3;
+}
+
+.chance-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.calculate-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.calculate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Правый блок - ИИ-помощник */
+.ai-block {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 400px;
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.ai-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+  line-height: 1.3;
+}
+
+.ai-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.desktop-badge {
+
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.desktop-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.advantages-section {
+  padding: 80px 20px;
+  background: #f8f9fa;
+}
+
+.advantages-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.advantage-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  aspect-ratio: 4/3;
+}
+
+.advantage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.advantage-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.advantage-card:hover .advantage-image {
+  transform: scale(1.05);
+}
+
+.advantage-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 30px 20px 20px;
+  color: white;
+}
+
+.advantage-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
