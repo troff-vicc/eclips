@@ -27,7 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Чтение .env файла вручную
 
+
+def read_env():
+    with open(".env") as f:
+        return f.read()
+
+
+# Вызываем функцию
+API_KEY = read_env()
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,7 +51,8 @@ INSTALLED_APPS = [
     'corsheaders',
     
     'news',
-    'calculator'
+    'calculator',
+    'chat',
 ]
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173']

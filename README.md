@@ -61,7 +61,11 @@ npm run dev
 
 ## 📸 Скриншоты
 
-Будет добавленно по мере согласования с дизайнером
+![admission.png](docs%2Fassets%2Fadmission.png)
+
+![calc.png](docs/assets/calc.png)
+
+![AI.png](docs%2Fassets%2FAI.png)
 
 ## 📁 Структура проекта
 

@@ -1,19 +1,26 @@
+import React, { useState, useEffect } from 'react';
 import './University.css';
 
 const University = () => {
   return (
-    <div className="university-page">
-      <section className="page-hero">
-        <div className="container">
-          <h1>Университет</h1>
-          <p>История, руководство и структура</p>
+    <div className="home">
+      <header className="header">
+        <div className="header-container">
+          <a href="/"><img src="./logo.png" alt="Логотип" className="logo" /></a>
+          <nav className="nav">
+            <a className="but_header" href="/university" id='univerchek'>Университет</a>
+            <a className="but_header" href="/education">Образование</a>
+            <a className="but_header" href="/science">Наука</a>
+            <a className="but_header" href="/library">Библиотека</a>
+          </nav>
         </div>
-      </section>
+      </header>
 
-      <section className="page-content">
-        <div className="container">
-          <h2>О нашем университете</h2>
-          <p>Содержимое страницы университета...</p>
+      <section className="hero1">
+        <div className="hero-content">
+          <div className="hero-text">
+            <h1 id='mice'>Университет</h1>
+          </div>
         </div>
       </section>
     </div>
